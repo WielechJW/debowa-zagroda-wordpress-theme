@@ -1,0 +1,16 @@
+.env
+.DS_Store
+Thumbs.db
+
+# Dane środowiska uruchomieniowego WordPressa
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/debug.log
+
+# Zależności i artefakty narzędzi
+node_modules/
+vendor/
+*.log
+.idea/
+.vscode/

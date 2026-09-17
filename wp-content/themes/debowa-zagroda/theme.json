@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "layout": {
+      "contentSize": "48rem",
+      "wideSize": "72rem"
+    },
+    "color": {
+      "palette": [
+        {
+          "slug": "forest",
+          "color": "#466447",
+          "name": "Leśna zieleń"
+        },
+        {
+          "slug": "cream",
+          "color": "#f7f4ec",
+          "name": "Kremowy"
+        },
+        {
+          "slug": "ink",
+          "color": "#243126",
+          "name": "Atramentowy"
+        }
+      ]
+    },
+    "typography": {
+      "fluid": true
+    }
+  }
+}
