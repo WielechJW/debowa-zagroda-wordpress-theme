@@ -1,29 +1,29 @@
 # Dębowa Zagroda — WordPress
 
-Lokalne środowisko WordPress dla strony alpakarni, uruchamiane w Dockerze. Repozytorium zawiera własny klasyczny motyw `debowa-zagroda`; pliki WordPressa i dane bazy pozostają w wolumenach Dockera.
+A local, Docker-based WordPress environment for an alpaca farm website. The repository includes a custom classic theme called `debowa-zagroda`; WordPress files and database data are stored in Docker volumes.
 
-## Wymagania
+## Requirements
 
-- Docker Desktop albo Docker Engine z wtyczką Compose
-- opcjonalnie `make`
+- Docker Desktop or Docker Engine with the Compose plugin
+- `make` (optional)
 
-## Start
+## Getting Started
 
 ```bash
 cp .env.example .env
 docker compose up -d
 ```
 
-Pierwsze uruchomienie może potrwać kilkadziesiąt sekund, ponieważ Docker pobiera obrazy, a usługa `setup` instaluje WordPressa i aktywuje motyw.
+The first startup may take several seconds while Docker downloads the images and the `setup` service installs WordPress and activates the theme.
 
-- strona: http://localhost:8080
-- panel: http://localhost:8080/wp-admin
-- domyślny login: `admin`
-- domyślne hasło: `admin`
+- Website: http://localhost:8080
+- Admin panel: http://localhost:8080/wp-admin
+- Default username: `admin`
+- Default password: `admin`
 
-Przed rozpoczęciem pracy zmień dane administratora w `.env`. Plik ten jest ignorowany przez Git.
+Before you start working, change the administrator credentials in `.env`. This file is ignored by Git.
 
-Możesz też użyć skrótów:
+You can also use the following shortcuts:
 
 ```bash
 make up
@@ -32,19 +32,19 @@ make status
 make down
 ```
 
-## Motyw
+## Theme
 
-Kod motywu znajduje się w:
+The theme code is located in:
 
 ```text
 wp-content/themes/debowa-zagroda/
 ```
 
-Zmiany w PHP, CSS i JavaScript są widoczne w kontenerze od razu. Motyw zawiera podstawowe szablony, menu, obsługę logo, miniatur wpisów, style edytora i niewielki plik JavaScript.
+Changes to PHP, CSS, and JavaScript files are reflected in the container immediately. The theme includes basic templates, menus, logo support, featured images, editor styles, and a small JavaScript file.
 
 ## WP-CLI
 
-Polecenia WP-CLI można wykonywać przez serwis narzędziowy:
+You can run WP-CLI commands through the utility service:
 
 ```bash
 make wp ARGS="plugin list"
@@ -52,29 +52,29 @@ make wp ARGS="user list"
 make wp ARGS="cache flush"
 ```
 
-Bez `make` odpowiednikiem jest:
+Without `make`, use the equivalent command:
 
 ```bash
 docker compose run --rm wp-cli plugin list
 ```
 
-## Reset środowiska
+## Resetting the Environment
 
-To polecenie usuwa lokalną bazę i pliki WordPressa zapisane w wolumenach, po czym tworzy czystą instalację:
+The following command removes the local database and WordPress files stored in Docker volumes, then creates a clean installation:
 
 ```bash
 make reset
 ```
 
-Kod motywu w repozytorium nie zostanie usunięty.
+The theme code in the repository will not be removed.
 
-## Publikacja na GitHubie
+## Publishing to GitHub
 
-Po utworzeniu pustego repozytorium na GitHubie:
+After creating an empty repository on GitHub, run:
 
 ```bash
-git remote add origin git@github.com:TWOJ-LOGIN/debowa-zagroda.git
+git remote add origin git@github.com:YOUR-USERNAME/debowa-zagroda.git
 git push -u origin main
 ```
 
-Nie należy publikować pliku `.env` ani produkcyjnych haseł. Konfiguracja Docker Compose jest przeznaczona do lokalnego developmentu, nie do hostingu produkcyjnego.
+Do not publish the `.env` file or any production passwords. The Docker Compose configuration is intended for local development, not production hosting.
