@@ -5,29 +5,56 @@
     "appearanceTools": true,
     "layout": {
       "contentSize": "48rem",
-      "wideSize": "72rem"
+      "wideSize": "78rem"
     },
     "color": {
       "palette": [
         {
           "slug": "forest",
-          "color": "#466447",
-          "name": "Leśna zieleń"
+          "color": "#1e3b2a",
+          "name": "Dębowa zieleń"
         },
         {
           "slug": "cream",
-          "color": "#f7f4ec",
-          "name": "Kremowy"
+          "color": "#f4efe4",
+          "name": "Ciepły krem"
+        },
+        {
+          "slug": "paper",
+          "color": "#fffdf8",
+          "name": "Papier"
+        },
+        {
+          "slug": "terracotta",
+          "color": "#bd6b4a",
+          "name": "Terakota"
+        },
+        {
+          "slug": "honey",
+          "color": "#d8a65d",
+          "name": "Miodowy"
         },
         {
           "slug": "ink",
-          "color": "#243126",
-          "name": "Atramentowy"
+          "color": "#17251c",
+          "name": "Atrament"
         }
       ]
     },
     "typography": {
-      "fluid": true
+      "fluid": true,
+      "fontFamilies": [
+        {
+          "fontFamily": "\"Avenir Next\", Avenir, \"Segoe UI\", Helvetica, Arial, sans-serif",
+          "name": "Dębowa Sans",
+          "slug": "debowa-sans"
+        },
+        {
+          "fontFamily": "Iowan Old Style, Baskerville, \"Times New Roman\", serif",
+          "name": "Dębowa Serif",
+          "slug": "debowa-serif"
+        }
+      ]
     }
   }
 }

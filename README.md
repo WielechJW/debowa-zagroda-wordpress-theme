@@ -40,7 +40,13 @@ The theme code is located in:
 wp-content/themes/debowa-zagroda/
 ```
 
-Changes to PHP, CSS, and JavaScript files are reflected in the container immediately. The theme includes basic templates, menus, logo support, featured images, editor styles, and a small JavaScript file.
+Changes to PHP, CSS, and JavaScript files are reflected in the container immediately. The theme includes a complete animated one-page homepage, sticky navigation, editable sections, a native contact form, responsive layouts, menus, logo support, featured images, and editor styles.
+
+### Editing the homepage
+
+Open **Appearance → Customize → Dębowa Zagroda — strona główna**. The panel contains separate groups for Hero, About, Offer, Alpacas, Gallery, and Contact/Footer. All main marketing copy, contact details, social links, and homepage images can be replaced there without editing code.
+
+The contact form sends messages to the address configured in **Kontakt i stopka → E-mail odbiorcy formularza**. On production, configure WordPress mail delivery (SMTP or a transactional mail provider) to ensure reliable delivery.
 
 ## WP-CLI
 
