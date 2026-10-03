@@ -9,6 +9,9 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+require_once get_template_directory() . '/inc/offer.php';
+require_once get_template_directory() . '/inc/contact.php';
+
 function debowa_zagroda_setup(): void {
     load_theme_textdomain( 'debowa-zagroda', get_template_directory() . '/languages' );
     add_theme_support( 'title-tag' );
@@ -50,12 +53,12 @@ function debowa_zagroda_image( string $filename ): string {
 function debowa_zagroda_fallback_menu(): void {
     $base = is_front_page() ? '' : home_url( '/' );
     ?>
-    <ul class="menu">
+    <ul id="primary-menu" class="menu">
         <li><a href="<?php echo esc_url( $base . '#o-nas' ); ?>"><?php esc_html_e( 'O nas', 'debowa-zagroda' ); ?></a></li>
-        <li><a href="<?php echo esc_url( $base . '#oferta' ); ?>"><?php esc_html_e( 'Oferta', 'debowa-zagroda' ); ?></a></li>
+        <li><a href="<?php echo esc_url( debowa_zagroda_offer_url() ); ?>"<?php if ( is_page( 'oferta' ) || is_page_template( 'page-oferta.php' ) ) : ?> class="is-active" aria-current="page"<?php endif; ?>><?php esc_html_e( 'Oferta i cennik', 'debowa-zagroda' ); ?></a></li>
         <li><a href="<?php echo esc_url( $base . '#alpaki' ); ?>"><?php esc_html_e( 'Nasze alpaki', 'debowa-zagroda' ); ?></a></li>
         <li><a href="<?php echo esc_url( $base . '#galeria' ); ?>"><?php esc_html_e( 'Galeria', 'debowa-zagroda' ); ?></a></li>
-        <li><a class="menu-cta" href="<?php echo esc_url( $base . '#kontakt' ); ?>"><?php esc_html_e( 'Kontakt', 'debowa-zagroda' ); ?></a></li>
+        <li><a class="menu-cta" href="<?php echo esc_url( debowa_zagroda_contact_url() ); ?>"<?php if ( is_page( 'kontakt' ) || is_page_template( 'page-kontakt.php' ) ) : ?> aria-current="page"<?php endif; ?>><?php esc_html_e( 'Kontakt', 'debowa-zagroda' ); ?></a></li>
     </ul>
     <?php
 }
@@ -104,10 +107,10 @@ function debowa_zagroda_customize_register( WP_Customize_Manager $wp_customize )
         'offers_intro'       => array( 'offers', __( 'Krótki opis sekcji', 'debowa-zagroda' ), 'Każde spotkanie dopasowujemy do rytmu zwierząt i potrzeb naszych gości.' ),
         'offer_1_title'      => array( 'offers', __( 'Oferta 1 — tytuł', 'debowa-zagroda' ), 'Spacer z alpakami' ),
         'offer_1_text'       => array( 'offers', __( 'Oferta 1 — opis', 'debowa-zagroda' ), 'Spokojna wyprawa polną ścieżką w towarzystwie naszych puchatych przewodników. Czas na zdjęcia, głaskanie i poznanie ich charakterów.' ),
-        'offer_1_meta'       => array( 'offers', __( 'Oferta 1 — informacje', 'debowa-zagroda' ), 'około 60–75 min' ),
+        'offer_1_meta'       => array( 'offers', __( 'Oferta 1 — informacje', 'debowa-zagroda' ), 'około 1 godz.' ),
         'offer_2_title'      => array( 'offers', __( 'Oferta 2 — tytuł', 'debowa-zagroda' ), 'Wizyta w zagrodzie' ),
         'offer_2_text'       => array( 'offers', __( 'Oferta 2 — opis', 'debowa-zagroda' ), 'Poznaj całą ekipę z bliska, dowiedz się, co alpaki lubią najbardziej i spędź swobodny czas w ich spokojnym rytmie.' ),
-        'offer_2_meta'       => array( 'offers', __( 'Oferta 2 — informacje', 'debowa-zagroda' ), 'około 45–60 min' ),
+        'offer_2_meta'       => array( 'offers', __( 'Oferta 2 — informacje', 'debowa-zagroda' ), '30–40 min' ),
         'offers_button'      => array( 'offers', __( 'Tekst przycisku', 'debowa-zagroda' ), 'Zapytaj o termin' ),
         'alpacas_eyebrow'    => array( 'alpacas', __( 'Nadtytuł', 'debowa-zagroda' ), 'Poznaj nasze alpaki' ),
         'alpacas_title'      => array( 'alpacas', __( 'Tytuł sekcji', 'debowa-zagroda' ), 'Cztery charaktery. Jedno stado.' ),
@@ -124,8 +127,8 @@ function debowa_zagroda_customize_register( WP_Customize_Manager $wp_customize )
         'contact_eyebrow'    => array( 'contact', __( 'Nadtytuł', 'debowa-zagroda' ), 'Do zobaczenia w zagrodzie' ),
         'contact_title'      => array( 'contact', __( 'Tytuł sekcji', 'debowa-zagroda' ), 'Masz ochotę nas odwiedzić?' ),
         'contact_text'       => array( 'contact', __( 'Opis', 'debowa-zagroda' ), 'Napisz, jaki termin i rodzaj spotkania Cię interesuje. Odezwiemy się i wspólnie ustalimy szczegóły.' ),
-        'contact_address'    => array( 'contact', __( 'Adres', 'debowa-zagroda' ), 'Dębowa Zagroda, Polska' ),
-        'contact_phone'      => array( 'contact', __( 'Telefon', 'debowa-zagroda' ), '+48 000 000 000' ),
+        'contact_address'    => array( 'contact', __( 'Adres', 'debowa-zagroda' ), 'Dębowa 3e, Warszawa' ),
+        'contact_phone'      => array( 'contact', __( 'Telefon', 'debowa-zagroda' ), '+48 608 242 618' ),
         'contact_hours'      => array( 'contact', __( 'Godziny wizyt', 'debowa-zagroda' ), 'Wizyty po wcześniejszej rezerwacji' ),
         'footer_text'        => array( 'contact', __( 'Tekst w stopce', 'debowa-zagroda' ), 'Kameralne spotkania z alpakami, blisko natury.' ),
     );
@@ -205,7 +208,7 @@ function debowa_zagroda_customize_register( WP_Customize_Manager $wp_customize )
 add_action( 'customize_register', 'debowa_zagroda_customize_register' );
 
 function debowa_zagroda_handle_contact_form(): void {
-    $redirect = home_url( '/#kontakt' );
+    $redirect = debowa_zagroda_contact_url() . '#formularz';
     if (
         ! isset( $_POST['debowa_contact_nonce'] ) ||
         ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['debowa_contact_nonce'] ) ), 'debowa_contact' )
@@ -224,6 +227,12 @@ function debowa_zagroda_handle_contact_form(): void {
     $phone   = isset( $_POST['phone'] ) ? sanitize_text_field( wp_unslash( $_POST['phone'] ) ) : '';
     $visit   = isset( $_POST['visit'] ) ? sanitize_text_field( wp_unslash( $_POST['visit'] ) ) : '';
     $message = isset( $_POST['message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['message'] ) ) : '';
+
+    $visits = array_column( debowa_zagroda_offer_packages(), 'title' );
+    $visits = array_merge( $visits, array( 'Oferta indywidualna', 'Inne' ) );
+    if ( in_array( $visit, $visits, true ) ) {
+        $redirect = add_query_arg( 'visit', $visit, $redirect );
+    }
 
     if ( '' === $name || ! is_email( $email ) || '' === $message ) {
         wp_safe_redirect( add_query_arg( 'form', 'invalid', $redirect ) );

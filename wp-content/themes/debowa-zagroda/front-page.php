@@ -15,14 +15,14 @@ $offers = array(
         'number' => '01',
         'title'  => get_theme_mod( 'offer_1_title', 'Spacer z alpakami' ),
         'text'   => get_theme_mod( 'offer_1_text', 'Spokojna wyprawa polną ścieżką w towarzystwie naszych puchatych przewodników. Czas na zdjęcia, głaskanie i poznanie ich charakterów.' ),
-        'meta'   => get_theme_mod( 'offer_1_meta', 'około 60–75 min' ),
+        'meta'   => get_theme_mod( 'offer_1_meta', 'około 1 godz.' ),
         'image'  => get_theme_mod( 'offer_1_image', debowa_zagroda_image( 'alpaca-walk.webp' ) ),
     ),
     array(
         'number' => '02',
         'title'  => get_theme_mod( 'offer_2_title', 'Wizyta w zagrodzie' ),
         'text'   => get_theme_mod( 'offer_2_text', 'Poznaj całą ekipę z bliska, dowiedz się, co alpaki lubią najbardziej i spędź swobodny czas w ich spokojnym rytmie.' ),
-        'meta'   => get_theme_mod( 'offer_2_meta', 'około 45–60 min' ),
+        'meta'   => get_theme_mod( 'offer_2_meta', '30–40 min' ),
         'image'  => get_theme_mod( 'offer_2_image', debowa_zagroda_image( 'alpaca-visit.webp' ) ),
     ),
 );
@@ -70,9 +70,8 @@ for ( $i = 1; $i <= 6; $i++ ) {
     }
 }
 
-$phone      = get_theme_mod( 'contact_phone', '+48 000 000 000' );
+$phone      = get_theme_mod( 'contact_phone', '+48 608 242 618' );
 $email      = get_theme_mod( 'contact_email', get_option( 'admin_email' ) );
-$form_state = isset( $_GET['form'] ) ? sanitize_key( wp_unslash( $_GET['form'] ) ) : '';
 ?>
 
 <section id="start" class="hero" aria-labelledby="hero-title">
@@ -91,7 +90,7 @@ $form_state = isset( $_GET['form'] ) ? sanitize_key( wp_unslash( $_GET['form'] )
             <h1 id="hero-title" data-hero-item><?php echo esc_html( get_theme_mod( 'hero_title', 'Zwolnij. Alpaki już na Ciebie czekają.' ) ); ?></h1>
             <p class="hero__lead" data-hero-item><?php echo esc_html( get_theme_mod( 'hero_text', 'Dębowa Zagroda to kameralne miejsce, w którym możesz odetchnąć, poznać nasze alpaki i zabrać ze sobą naprawdę dobre wspomnienia.' ) ); ?></p>
             <div class="hero__actions" data-hero-item>
-                <a class="button button--primary" href="#kontakt">
+                <a class="button button--primary" href="<?php echo esc_url( debowa_zagroda_contact_url() ); ?>">
                     <?php echo esc_html( get_theme_mod( 'hero_button', 'Zaplanuj wizytę' ) ); ?>
                     <span aria-hidden="true">↗</span>
                 </a>
@@ -154,7 +153,7 @@ $form_state = isset( $_GET['form'] ) ? sanitize_key( wp_unslash( $_GET['form'] )
         </header>
 
         <div class="offers-grid" data-reveal-group>
-            <?php foreach ( $offers as $offer ) : ?>
+            <?php foreach ( $offers as $index => $offer ) : ?>
                 <article class="offer-card">
                     <div class="offer-card__media">
                         <img src="<?php echo esc_url( $offer['image'] ); ?>" alt="<?php echo esc_attr( $offer['title'] ); ?>" loading="lazy">
@@ -170,11 +169,15 @@ $form_state = isset( $_GET['form'] ) ? sanitize_key( wp_unslash( $_GET['form'] )
                                 <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
                                 <?php echo esc_html( $offer['meta'] ); ?>
                             </span>
-                            <a class="circle-link" href="#kontakt" aria-label="<?php echo esc_attr( get_theme_mod( 'offers_button', 'Zapytaj o termin' ) . ': ' . $offer['title'] ); ?>">↗</a>
+                            <a class="circle-link" href="<?php echo esc_url( debowa_zagroda_booking_url( 0 === $index ? 'Spacer z alpakami' : 'Spotkanie z alpakami' ) ); ?>" aria-label="<?php echo esc_attr( get_theme_mod( 'offers_button', 'Zapytaj o termin' ) . ': ' . $offer['title'] ); ?>">↗</a>
                         </div>
                     </div>
                 </article>
             <?php endforeach; ?>
+        </div>
+        <div class="offers-more reveal">
+            <p><?php esc_html_e( 'Spotkania, spacery do lasu, sesje zdjęciowe i wyjątkowe okazje.', 'debowa-zagroda' ); ?></p>
+            <a class="button button--cream" href="<?php echo esc_url( debowa_zagroda_offer_url() ); ?>"><?php esc_html_e( 'Zobacz ofertę i cennik', 'debowa-zagroda' ); ?><span aria-hidden="true">↗</span></a>
         </div>
     </div>
 </section>
@@ -250,9 +253,9 @@ $form_state = isset( $_GET['form'] ) ? sanitize_key( wp_unslash( $_GET['form'] )
                 <div>
                     <span><?php esc_html_e( 'Gdzie jesteśmy', 'debowa-zagroda' ); ?></span>
                     <?php if ( get_theme_mod( 'maps_url', '' ) ) : ?>
-                        <a href="<?php echo esc_url( get_theme_mod( 'maps_url', '' ) ); ?>" target="_blank" rel="noopener"><?php echo esc_html( get_theme_mod( 'contact_address', 'Dębowa Zagroda, Polska' ) ); ?></a>
+                        <a href="<?php echo esc_url( get_theme_mod( 'maps_url', '' ) ); ?>" target="_blank" rel="noopener"><?php echo esc_html( get_theme_mod( 'contact_address', 'Dębowa 3e, Warszawa' ) ); ?></a>
                     <?php else : ?>
-                        <strong><?php echo esc_html( get_theme_mod( 'contact_address', 'Dębowa Zagroda, Polska' ) ); ?></strong>
+                        <strong><?php echo esc_html( get_theme_mod( 'contact_address', 'Dębowa 3e, Warszawa' ) ); ?></strong>
                     <?php endif; ?>
                 </div>
                 <div>
@@ -268,64 +271,7 @@ $form_state = isset( $_GET['form'] ) ? sanitize_key( wp_unslash( $_GET['form'] )
         </div>
 
         <div class="contact__form-wrap reveal reveal--right">
-            <?php if ( 'success' === $form_state ) : ?>
-                <div class="form-message form-message--success" role="status">
-                    <strong><?php esc_html_e( 'Dziękujemy!', 'debowa-zagroda' ); ?></strong>
-                    <?php esc_html_e( 'Wiadomość została wysłana. Odezwiemy się najszybciej, jak to możliwe.', 'debowa-zagroda' ); ?>
-                </div>
-            <?php elseif ( 'invalid' === $form_state ) : ?>
-                <div class="form-message form-message--error" role="alert"><?php esc_html_e( 'Uzupełnij imię, poprawny e-mail i wiadomość.', 'debowa-zagroda' ); ?></div>
-            <?php elseif ( 'error' === $form_state ) : ?>
-                <div class="form-message form-message--error" role="alert"><?php esc_html_e( 'Nie udało się wysłać wiadomości. Spróbuj ponownie lub napisz do nas bezpośrednio.', 'debowa-zagroda' ); ?></div>
-            <?php endif; ?>
-
-            <form class="contact-form" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post">
-                <input type="hidden" name="action" value="debowa_contact">
-                <?php wp_nonce_field( 'debowa_contact', 'debowa_contact_nonce' ); ?>
-                <div class="form-honeypot" aria-hidden="true">
-                    <label for="website"><?php esc_html_e( 'Strona internetowa', 'debowa-zagroda' ); ?></label>
-                    <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
-                </div>
-
-                <div class="form-row">
-                    <label>
-                        <span><?php esc_html_e( 'Imię', 'debowa-zagroda' ); ?> *</span>
-                        <input name="name" type="text" autocomplete="name" required placeholder="<?php esc_attr_e( 'Jak masz na imię?', 'debowa-zagroda' ); ?>">
-                    </label>
-                    <label>
-                        <span><?php esc_html_e( 'E-mail', 'debowa-zagroda' ); ?> *</span>
-                        <input name="email" type="email" autocomplete="email" required placeholder="<?php esc_attr_e( 'Twój adres e-mail', 'debowa-zagroda' ); ?>">
-                    </label>
-                </div>
-
-                <div class="form-row">
-                    <label>
-                        <span><?php esc_html_e( 'Telefon', 'debowa-zagroda' ); ?></span>
-                        <input name="phone" type="tel" autocomplete="tel" placeholder="<?php esc_attr_e( 'Opcjonalnie', 'debowa-zagroda' ); ?>">
-                    </label>
-                    <label>
-                        <span><?php esc_html_e( 'Interesuje mnie', 'debowa-zagroda' ); ?></span>
-                        <select name="visit">
-                            <option value="Spacer z alpakami"><?php esc_html_e( 'Spacer z alpakami', 'debowa-zagroda' ); ?></option>
-                            <option value="Wizyta w zagrodzie"><?php esc_html_e( 'Wizyta w zagrodzie', 'debowa-zagroda' ); ?></option>
-                            <option value="Inne"><?php esc_html_e( 'Coś innego', 'debowa-zagroda' ); ?></option>
-                        </select>
-                    </label>
-                </div>
-
-                <label>
-                    <span><?php esc_html_e( 'Wiadomość', 'debowa-zagroda' ); ?> *</span>
-                    <textarea name="message" rows="5" required placeholder="<?php esc_attr_e( 'Napisz, kiedy chcesz nas odwiedzić i ile osób planuje wizytę…', 'debowa-zagroda' ); ?>"></textarea>
-                </label>
-
-                <div class="contact-form__footer">
-                    <p><?php esc_html_e( 'Wysyłając formularz, zgadzasz się na kontakt w sprawie wizyty.', 'debowa-zagroda' ); ?></p>
-                    <button class="button button--cream" type="submit">
-                        <?php esc_html_e( 'Wyślij wiadomość', 'debowa-zagroda' ); ?>
-                        <span aria-hidden="true">↗</span>
-                    </button>
-                </div>
-            </form>
+            <?php get_template_part( 'template-parts/contact-form' ); ?>
         </div>
     </div>
 </section>

@@ -56,4 +56,4 @@
     </div>
 </header>
 
-<main id="content" class="<?php echo esc_attr( is_front_page() ? 'site-main site-main--front' : 'site-main site-shell' ); ?>">
+<main id="content" class="<?php echo esc_attr( is_front_page() || is_page( array( 'oferta', 'kontakt' ) ) || is_page_template( array( 'page-oferta.php', 'page-kontakt.php' ) ) ? 'site-main site-main--front' : 'site-main site-shell' ); ?>">

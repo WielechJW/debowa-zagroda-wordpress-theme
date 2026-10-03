@@ -48,6 +48,28 @@ Open **Appearance → Customize → Dębowa Zagroda — strona główna**. The p
 
 The contact form sends messages to the address configured in **Kontakt i stopka → E-mail odbiorcy formularza**. On production, configure WordPress mail delivery (SMTP or a transactional mail provider) to ensure reliable delivery.
 
+### Offer and pricing page
+
+The **Oferta i cennik** page uses `page-oferta.php` and includes meetings, walks, private visits, photo sessions, and individually priced events. Change prices and durations in **Appearance → Customize → Dębowa Zagroda — oferta i cennik**. Booking links select the matching visit in the contact page form.
+
+The setup script creates the published `/oferta/` page if it does not exist. For an existing installation, create a page with the slug `oferta` and select the **Oferta i cennik** template (or run the command below). The default navigation and footer link to it automatically; if you use a custom WordPress menu, add the page to that menu.
+
+```bash
+make wp ARGS='post create --post_type=page --post_title="Oferta i cennik" --post_name=oferta --post_status=publish --page_template=page-oferta.php'
+```
+
+### Contact page
+
+The `/kontakt/` page uses `page-kontakt.php` and includes contact details, a reservation form, social links when configured, and a directions link. Its text and contact details use the existing **Appearance → Customize → Dębowa Zagroda — strona główna → Kontakt i stopka** settings. If no map URL is configured, the directions link searches Google Maps for the configured address.
+
+The homepage and contact page share `template-parts/contact-form.php`. All form results return to `/kontakt/#formularz`, preserving the selected visit. The default menu, footer, and booking links lead to the contact page. Add it manually if using a custom WordPress menu.
+
+The setup script creates the page if it does not exist. To add it to an existing installation:
+
+```bash
+make wp ARGS='post create --post_type=page --post_title="Kontakt" --post_name=kontakt --post_status=publish --page_template=page-kontakt.php'
+```
+
 ## WP-CLI
 
 You can run WP-CLI commands through the utility service:

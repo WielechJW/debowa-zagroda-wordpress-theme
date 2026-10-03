@@ -34,15 +34,16 @@ $instagram = get_theme_mod( 'instagram_url', '' );
                 ?>
             <?php else : ?>
                 <a href="<?php echo esc_url( home_url( '/#o-nas' ) ); ?>"><?php esc_html_e( 'O nas', 'debowa-zagroda' ); ?></a>
-                <a href="<?php echo esc_url( home_url( '/#oferta' ) ); ?>"><?php esc_html_e( 'Oferta', 'debowa-zagroda' ); ?></a>
+                <a href="<?php echo esc_url( debowa_zagroda_offer_url() ); ?>"><?php esc_html_e( 'Oferta i cennik', 'debowa-zagroda' ); ?></a>
                 <a href="<?php echo esc_url( home_url( '/#alpaki' ) ); ?>"><?php esc_html_e( 'Nasze alpaki', 'debowa-zagroda' ); ?></a>
+                <a href="<?php echo esc_url( debowa_zagroda_contact_url() ); ?>"><?php esc_html_e( 'Kontakt', 'debowa-zagroda' ); ?></a>
             <?php endif; ?>
         </div>
 
         <div class="site-footer__nav">
             <span><?php esc_html_e( 'Kontakt', 'debowa-zagroda' ); ?></span>
             <a href="mailto:<?php echo esc_attr( get_theme_mod( 'contact_email', get_option( 'admin_email' ) ) ); ?>"><?php echo esc_html( get_theme_mod( 'contact_email', get_option( 'admin_email' ) ) ); ?></a>
-            <a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', get_theme_mod( 'contact_phone', '+48 000 000 000' ) ) ); ?>"><?php echo esc_html( get_theme_mod( 'contact_phone', '+48 000 000 000' ) ); ?></a>
+            <a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', get_theme_mod( 'contact_phone', '+48 608 242 618' ) ) ); ?>"><?php echo esc_html( get_theme_mod( 'contact_phone', '+48 608 242 618' ) ); ?></a>
         </div>
 
         <?php if ( $facebook || $instagram ) : ?>
