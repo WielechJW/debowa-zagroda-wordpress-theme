@@ -7,8 +7,12 @@
 
 get_header();
 
-$hero_image  = get_theme_mod( 'hero_image', debowa_zagroda_image( 'hero-alpacas.webp' ) );
-$about_image = get_theme_mod( 'about_image', debowa_zagroda_image( 'alpaca-walk.webp' ) );
+$hero_default = debowa_zagroda_image( 'hero-las.webp' );
+$hero_image   = get_theme_mod( 'hero_image', $hero_default );
+$forest_hero  = $hero_default === $hero_image;
+$about_default = debowa_zagroda_image( 'czas-section.webp' );
+$about_image   = get_theme_mod( 'about_image', $about_default );
+$about_portrait = $about_default === $about_image;
 
 $offers = array(
     array(
@@ -16,14 +20,18 @@ $offers = array(
         'title'  => get_theme_mod( 'offer_1_title', 'Spacer z alpakami' ),
         'text'   => get_theme_mod( 'offer_1_text', 'Spokojna wyprawa polną ścieżką w towarzystwie naszych puchatych przewodników. Czas na zdjęcia, głaskanie i poznanie ich charakterów.' ),
         'meta'   => get_theme_mod( 'offer_1_meta', 'około 1 godz.' ),
-        'image'  => get_theme_mod( 'offer_1_image', debowa_zagroda_image( 'alpaca-walk.webp' ) ),
+        'image'         => get_theme_mod( 'offer_1_image', debowa_zagroda_image( 'spacer.webp' ) ),
+        'default_image' => debowa_zagroda_image( 'spacer.webp' ),
+        'small_image'   => debowa_zagroda_image( 'spacer-768.webp' ),
     ),
     array(
         'number' => '02',
         'title'  => get_theme_mod( 'offer_2_title', 'Wizyta w zagrodzie' ),
         'text'   => get_theme_mod( 'offer_2_text', 'Poznaj całą ekipę z bliska, dowiedz się, co alpaki lubią najbardziej i spędź swobodny czas w ich spokojnym rytmie.' ),
         'meta'   => get_theme_mod( 'offer_2_meta', '30–40 min' ),
-        'image'  => get_theme_mod( 'offer_2_image', debowa_zagroda_image( 'alpaca-visit.webp' ) ),
+        'image'         => get_theme_mod( 'offer_2_image', debowa_zagroda_image( 'zagroda.webp' ) ),
+        'default_image' => debowa_zagroda_image( 'zagroda.webp' ),
+        'small_image'   => debowa_zagroda_image( 'zagroda-768.webp' ),
     ),
 );
 
@@ -71,12 +79,20 @@ for ( $i = 1; $i <= 6; $i++ ) {
 }
 
 $phone      = get_theme_mod( 'contact_phone', '+48 608 242 618' );
-$email      = get_theme_mod( 'contact_email', get_option( 'admin_email' ) );
 ?>
 
-<section id="start" class="hero" aria-labelledby="hero-title">
+<section id="start" class="hero<?php echo $forest_hero ? ' hero--forest' : ''; ?>" aria-labelledby="hero-title">
     <div class="hero__media" data-parallax>
-        <img src="<?php echo esc_url( $hero_image ); ?>" alt="<?php esc_attr_e( 'Alpaki na zielonej łące', 'debowa-zagroda' ); ?>" fetchpriority="high">
+        <img
+            src="<?php echo esc_url( $hero_image ); ?>"
+            <?php if ( $forest_hero ) : ?>
+                srcset="<?php echo esc_url( debowa_zagroda_image( 'hero-las-960.webp' ) ); ?> 960w, <?php echo esc_url( $hero_default ); ?> 2040w"
+                sizes="(max-width: 50rem) 100vw, 68vw"
+                width="2040" height="1530"
+            <?php endif; ?>
+            alt="<?php echo esc_attr( $forest_hero ? __( 'Spotkanie z alpakami podczas spaceru w lesie', 'debowa-zagroda' ) : __( 'Alpaki w Dębowej Zagrodzie', 'debowa-zagroda' ) ); ?>"
+            fetchpriority="high"
+        >
     </div>
     <div class="hero__wash" aria-hidden="true"></div>
     <div class="hero__grain" aria-hidden="true"></div>
@@ -105,10 +121,6 @@ $email      = get_theme_mod( 'contact_email', get_option( 'admin_email' ) );
             <span><?php esc_html_e( 'puchate', 'debowa-zagroda' ); ?><br><?php esc_html_e( 'charaktery', 'debowa-zagroda' ); ?></span>
         </div>
 
-        <a class="scroll-cue" href="#o-nas">
-            <span><?php esc_html_e( 'Przewiń, by nas poznać', 'debowa-zagroda' ); ?></span>
-            <i aria-hidden="true"></i>
-        </a>
     </div>
 </section>
 
@@ -116,7 +128,17 @@ $email      = get_theme_mod( 'contact_email', get_option( 'admin_email' ) );
     <div class="site-shell about">
         <div class="about__visual reveal reveal--left">
             <div class="about__image-wrap">
-                <img src="<?php echo esc_url( $about_image ); ?>" alt="<?php esc_attr_e( 'Spacer z alpakami pośród zieleni', 'debowa-zagroda' ); ?>" loading="lazy">
+                <img
+                    src="<?php echo esc_url( $about_image ); ?>"
+                    <?php if ( $about_portrait ) : ?>
+                        class="about__image--alpacas"
+                        srcset="<?php echo esc_url( debowa_zagroda_image( 'czas-section-768.webp' ) ); ?> 768w, <?php echo esc_url( $about_default ); ?> 1200w"
+                        sizes="(max-width: 50rem) min(calc(100vw - 2rem), 29rem), 27rem"
+                        width="1200" height="1600"
+                    <?php endif; ?>
+                    alt="<?php esc_attr_e( 'Alpaki w Dębowej Zagrodzie', 'debowa-zagroda' ); ?>"
+                    loading="lazy"
+                >
             </div>
             <div class="about__seal" data-float aria-hidden="true">
                 <svg viewBox="0 0 64 64">
@@ -156,7 +178,15 @@ $email      = get_theme_mod( 'contact_email', get_option( 'admin_email' ) );
             <?php foreach ( $offers as $index => $offer ) : ?>
                 <article class="offer-card">
                     <div class="offer-card__media">
-                        <img src="<?php echo esc_url( $offer['image'] ); ?>" alt="<?php echo esc_attr( $offer['title'] ); ?>" loading="lazy">
+                        <img
+                            src="<?php echo esc_url( $offer['image'] ); ?>"
+                            <?php if ( $offer['default_image'] === $offer['image'] ) : ?>
+                                srcset="<?php echo esc_url( $offer['small_image'] ); ?> 768w, <?php echo esc_url( $offer['default_image'] ); ?> 1440w"
+                                sizes="(max-width: 50rem) 100vw, 50vw"
+                            <?php endif; ?>
+                            alt="<?php echo esc_attr( $offer['title'] ); ?>"
+                            loading="lazy"
+                        >
                         <span class="offer-card__number"><?php echo esc_html( $offer['number'] ); ?></span>
                     </div>
                     <div class="offer-card__body">
@@ -169,7 +199,7 @@ $email      = get_theme_mod( 'contact_email', get_option( 'admin_email' ) );
                                 <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
                                 <?php echo esc_html( $offer['meta'] ); ?>
                             </span>
-                            <a class="circle-link" href="<?php echo esc_url( debowa_zagroda_booking_url( 0 === $index ? 'Spacer z alpakami' : 'Spotkanie z alpakami' ) ); ?>" aria-label="<?php echo esc_attr( get_theme_mod( 'offers_button', 'Zapytaj o termin' ) . ': ' . $offer['title'] ); ?>">↗</a>
+                            <a class="button button--primary" href="<?php echo esc_url( debowa_zagroda_booking_url( 0 === $index ? 'Spacer z alpakami' : 'Spotkanie z alpakami' ) ); ?>" aria-label="<?php echo esc_attr( get_theme_mod( 'offers_button', 'Zapytaj o termin' ) . ': ' . $offer['title'] ); ?>"><?php echo esc_html( get_theme_mod( 'offers_button', 'Zapytaj o termin' ) ); ?><span aria-hidden="true">↗</span></a>
                         </div>
                     </div>
                 </article>
@@ -204,7 +234,7 @@ $email      = get_theme_mod( 'contact_email', get_option( 'admin_email' ) );
             <?php foreach ( $alpacas as $index => $alpaca ) : ?>
                 <article class="alpaca-card">
                     <div class="alpaca-card__media">
-                        <img class="alpaca-card__image <?php echo esc_attr( $alpaca['position'] ); ?>" src="<?php echo esc_url( $alpaca['image'] ); ?>" alt="<?php echo esc_attr( $alpaca['name'] ); ?>" loading="lazy">
+                        <img class="alpaca-card__image <?php echo esc_attr( $alpaca['position'] ); ?><?php if ( debowa_zagroda_image( 'alpaca-visit.webp' ) === $alpaca['image'] ) : ?> alpaca-card__image--group<?php endif; ?>" src="<?php echo esc_url( $alpaca['image'] ); ?>" alt="<?php echo esc_attr( $alpaca['name'] ); ?>" loading="lazy">
                         <span class="alpaca-card__index">0<?php echo esc_html( (string) ( $index + 1 ) ); ?></span>
                     </div>
                     <div class="alpaca-card__body">
@@ -242,36 +272,19 @@ $email      = get_theme_mod( 'contact_email', get_option( 'admin_email' ) );
     </div>
 </section>
 
-<section id="kontakt" class="section section--contact">
-    <div class="site-shell contact">
+<section id="kontakt" class="section section--contact section--contact-invitation">
+    <div class="site-shell contact contact--invitation">
         <div class="contact__intro reveal reveal--left">
             <p class="eyebrow eyebrow--light"><span class="eyebrow__line"></span><?php echo esc_html( get_theme_mod( 'contact_eyebrow', 'Do zobaczenia w zagrodzie' ) ); ?></p>
             <h2><?php echo esc_html( get_theme_mod( 'contact_title', 'Masz ochotę nas odwiedzić?' ) ); ?></h2>
             <p class="section-lead"><?php echo esc_html( get_theme_mod( 'contact_text', 'Napisz, jaki termin i rodzaj spotkania Cię interesuje. Odezwiemy się i wspólnie ustalimy szczegóły.' ) ); ?></p>
 
-            <div class="contact__details">
-                <div>
-                    <span><?php esc_html_e( 'Gdzie jesteśmy', 'debowa-zagroda' ); ?></span>
-                    <?php if ( get_theme_mod( 'maps_url', '' ) ) : ?>
-                        <a href="<?php echo esc_url( get_theme_mod( 'maps_url', '' ) ); ?>" target="_blank" rel="noopener"><?php echo esc_html( get_theme_mod( 'contact_address', 'Dębowa 3e, Warszawa' ) ); ?></a>
-                    <?php else : ?>
-                        <strong><?php echo esc_html( get_theme_mod( 'contact_address', 'Dębowa 3e, Warszawa' ) ); ?></strong>
-                    <?php endif; ?>
-                </div>
-                <div>
-                    <span><?php esc_html_e( 'Porozmawiajmy', 'debowa-zagroda' ); ?></span>
-                    <a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ); ?>"><?php echo esc_html( $phone ); ?></a>
-                    <a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a>
-                </div>
-                <div>
-                    <span><?php esc_html_e( 'Kiedy', 'debowa-zagroda' ); ?></span>
-                    <strong><?php echo esc_html( get_theme_mod( 'contact_hours', 'Wizyty po wcześniejszej rezerwacji' ) ); ?></strong>
-                </div>
-            </div>
         </div>
-
-        <div class="contact__form-wrap reveal reveal--right">
-            <?php get_template_part( 'template-parts/contact-form' ); ?>
+        <div class="contact-invitation reveal reveal--right">
+            <p><?php echo esc_html( get_theme_mod( 'contact_hours', 'Wizyty po wcześniejszej rezerwacji' ) ); ?></p>
+            <a class="button button--cream" href="<?php echo esc_url( debowa_zagroda_contact_url() . '#formularz' ); ?>"><?php esc_html_e( 'Napisz do nas', 'debowa-zagroda' ); ?><span aria-hidden="true">↗</span></a>
+            <a class="contact-invitation__phone" href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', $phone ) ); ?>"><?php echo esc_html( $phone ); ?></a>
+            <a class="contact-invitation__details" href="<?php echo esc_url( debowa_zagroda_contact_url() ); ?>"><?php esc_html_e( 'Dane kontaktowe i dojazd', 'debowa-zagroda' ); ?> <span aria-hidden="true">↗</span></a>
         </div>
     </div>
 </section>

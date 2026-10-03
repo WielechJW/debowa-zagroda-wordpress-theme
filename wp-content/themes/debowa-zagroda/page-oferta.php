@@ -28,7 +28,7 @@ $events    = array( 'Urodziny z alpakami', 'Przedszkola i szkoły', 'Festyny i i
         </div>
         <div class="offer-intro__visual reveal reveal--right">
             <div class="about__image-wrap">
-                <img src="<?php echo esc_url( get_theme_mod( 'offer_2_image', debowa_zagroda_image( 'alpaca-visit.webp' ) ) ); ?>" alt="<?php esc_attr_e( 'Alpaki w Dębowej Zagrodzie', 'debowa-zagroda' ); ?>" fetchpriority="high">
+                <img src="<?php echo esc_url( get_theme_mod( 'offer_2_image', debowa_zagroda_image( 'zagroda.webp' ) ) ); ?>" alt="<?php esc_attr_e( 'Alpaki w Dębowej Zagrodzie', 'debowa-zagroda' ); ?>" fetchpriority="high">
             </div>
             <div class="offer-intro__note" data-float><span aria-hidden="true">✦</span><?php esc_html_e( 'Blisko natury.', 'debowa-zagroda' ); ?><br><?php esc_html_e( 'Blisko siebie.', 'debowa-zagroda' ); ?></div>
         </div>
@@ -58,7 +58,7 @@ $events    = array( 'Urodziny z alpakami', 'Przedszkola i szkoły', 'Festyny i i
                     <div class="price-card__top"><span class="price-card__index">0<?php echo esc_html( (string) ( $index + 1 ) ); ?></span><span class="price-card__duration"><?php echo esc_html( $package['duration'] ); ?></span></div>
                     <h3 id="package-<?php echo esc_attr( $id ); ?>"><?php echo esc_html( $package['title'] ); ?></h3>
                     <p class="price-card__description"><?php echo esc_html( $package['text'] ); ?></p>
-                    <p class="price-card__price"><strong><?php echo esc_html( $package['price'] ); ?></strong><span><?php esc_html_e( 'zł / os.', 'debowa-zagroda' ); ?></span></p>
+                    <p class="price-card__price"><strong><?php echo esc_html( $package['price'] ); ?></strong><span><?php esc_html_e( 'zł / osoba', 'debowa-zagroda' ); ?></span></p>
                     <ul class="price-card__features">
                         <?php foreach ( $package['features'] as $feature ) : ?><li><?php echo esc_html( $feature ); ?></li><?php endforeach; ?>
                     </ul>
@@ -68,10 +68,11 @@ $events    = array( 'Urodziny z alpakami', 'Przedszkola i szkoły', 'Festyny i i
                                 <strong><?php esc_html_e( 'Minimum 2 osoby.', 'debowa-zagroda' ); ?></strong><br>
                                 <?php echo esc_html( sprintf( __( 'Przy grupach powyżej 4 osób: %s zł za każdą kolejną osobę.', 'debowa-zagroda' ), get_theme_mod( 'pricing_forest_extra', '80' ) ) ); ?>
                             <?php else : ?>
-                                <?php esc_html_e( 'Dzieci do 3 lat bezpłatnie, pod opieką osoby dorosłej.', 'debowa-zagroda' ); ?>
+                                <strong><?php esc_html_e( 'Dzieci do 3 lat bezpłatnie.', 'debowa-zagroda' ); ?></strong><br>
+                                <?php esc_html_e( 'Pod opieką osoby dorosłej.', 'debowa-zagroda' ); ?>
                             <?php endif; ?>
                         </p>
-                        <a class="button button--ghost" href="<?php echo esc_url( debowa_zagroda_booking_url( $package['title'] ) ); ?>" aria-label="<?php echo esc_attr( 'Zapytaj o termin: ' . $package['title'] ); ?>"><?php esc_html_e( 'Zapytaj o termin', 'debowa-zagroda' ); ?><span aria-hidden="true">↗</span></a>
+                        <a class="button button--primary" href="<?php echo esc_url( debowa_zagroda_booking_url( $package['title'] ) ); ?>" aria-label="<?php echo esc_attr( 'Zapytaj o termin: ' . $package['title'] ); ?>"><?php esc_html_e( 'Zapytaj o termin', 'debowa-zagroda' ); ?><span aria-hidden="true">↗</span></a>
                     </div>
                 </article>
             <?php endforeach; ?>
@@ -96,8 +97,8 @@ $events    = array( 'Urodziny z alpakami', 'Przedszkola i szkoły', 'Festyny i i
                     <p class="private-card__duration"><?php echo esc_html( $package['duration'] ); ?></p>
                     <h3><?php echo esc_html( $package['title'] ); ?></h3>
                     <div class="private-card__bottom">
-                        <p class="private-card__price"><strong><?php echo esc_html( $package['price'] ); ?></strong> <?php esc_html_e( 'zł', 'debowa-zagroda' ); ?></p>
-                        <a class="circle-link" href="<?php echo esc_url( debowa_zagroda_booking_url( $package['title'] ) ); ?>" aria-label="<?php echo esc_attr( 'Zapytaj o termin: ' . $package['title'] ); ?>">↗</a>
+                        <p class="private-card__price"><strong><?php echo esc_html( $package['price'] ); ?></strong> <span><?php esc_html_e( 'zł / osoba', 'debowa-zagroda' ); ?></span></p>
+                        <a class="button button--cream" href="<?php echo esc_url( debowa_zagroda_booking_url( $package['title'] ) ); ?>" aria-label="<?php echo esc_attr( 'Zapytaj o termin: ' . $package['title'] ); ?>"><?php esc_html_e( 'Zapytaj o termin', 'debowa-zagroda' ); ?><span aria-hidden="true">↗</span></a>
                     </div>
                 </article>
             <?php endforeach; ?>

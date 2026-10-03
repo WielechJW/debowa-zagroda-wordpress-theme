@@ -40,7 +40,7 @@ document.documentElement.classList.add("has-js");
     });
 
     window.addEventListener("resize", () => {
-      if (window.innerWidth > 800) closeNavigation();
+      if (window.matchMedia("(min-width: 64.01rem)").matches) closeNavigation();
     });
   }
 

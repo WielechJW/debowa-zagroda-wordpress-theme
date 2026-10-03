@@ -14,7 +14,7 @@ $instagram = get_theme_mod( 'instagram_url', '' );
     <div class="site-shell site-footer__top">
         <div class="site-footer__brand">
             <a class="site-footer__title" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-                <?php bloginfo( 'name' ); ?>
+                <?php echo esc_html( debowa_zagroda_brand_name() ); ?>
             </a>
             <p><?php echo esc_html( get_theme_mod( 'footer_text', 'Kameralne spotkania z alpakami, blisko natury.' ) ); ?></p>
         </div>
@@ -62,9 +62,9 @@ $instagram = get_theme_mod( 'instagram_url', '' );
     </div>
 
     <div class="site-shell site-footer__bottom">
-        <p>&copy; <?php echo esc_html( wp_date( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?></p>
+        <p>&copy; <?php echo esc_html( wp_date( 'Y' ) ); ?> <?php echo esc_html( debowa_zagroda_brand_name() ); ?></p>
         <p><?php esc_html_e( 'Stworzone z troską o naturę i dobre spotkania.', 'debowa-zagroda' ); ?></p>
-        <a href="#start"><?php esc_html_e( 'Wróć na górę', 'debowa-zagroda' ); ?> ↑</a>
+        <a href="#top"><?php esc_html_e( 'Wróć na górę', 'debowa-zagroda' ); ?> ↑</a>
     </div>
 </footer>
 

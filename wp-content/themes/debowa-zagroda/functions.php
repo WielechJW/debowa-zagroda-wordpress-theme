@@ -50,6 +50,11 @@ function debowa_zagroda_image( string $filename ): string {
     return get_template_directory_uri() . '/assets/images/' . ltrim( $filename, '/' );
 }
 
+function debowa_zagroda_brand_name(): string {
+    $name = get_bloginfo( 'name' );
+    return 'debowa zagroda' === strtolower( remove_accents( $name ) ) ? 'Dębowa Zagroda' : $name;
+}
+
 function debowa_zagroda_fallback_menu(): void {
     $base = is_front_page() ? '' : home_url( '/' );
     ?>
@@ -175,10 +180,10 @@ function debowa_zagroda_customize_register( WP_Customize_Manager $wp_customize )
     }
 
     $images = array(
-        'hero_image'      => array( 'hero', __( 'Zdjęcie główne', 'debowa-zagroda' ), debowa_zagroda_image( 'hero-alpacas.webp' ) ),
-        'about_image'     => array( 'about', __( 'Zdjęcie w sekcji', 'debowa-zagroda' ), debowa_zagroda_image( 'alpaca-walk.webp' ) ),
-        'offer_1_image'   => array( 'offers', __( 'Oferta 1 — zdjęcie', 'debowa-zagroda' ), debowa_zagroda_image( 'alpaca-walk.webp' ) ),
-        'offer_2_image'   => array( 'offers', __( 'Oferta 2 — zdjęcie', 'debowa-zagroda' ), debowa_zagroda_image( 'alpaca-visit.webp' ) ),
+        'hero_image'      => array( 'hero', __( 'Zdjęcie główne', 'debowa-zagroda' ), debowa_zagroda_image( 'hero-las.webp' ) ),
+        'about_image'     => array( 'about', __( 'Zdjęcie w sekcji', 'debowa-zagroda' ), debowa_zagroda_image( 'czas-section.webp' ) ),
+        'offer_1_image'   => array( 'offers', __( 'Oferta 1 — zdjęcie', 'debowa-zagroda' ), debowa_zagroda_image( 'spacer.webp' ) ),
+        'offer_2_image'   => array( 'offers', __( 'Oferta 2 — zdjęcie', 'debowa-zagroda' ), debowa_zagroda_image( 'zagroda.webp' ) ),
         'alpaca_1_image'  => array( 'alpacas', __( 'Alpaka 1 — zdjęcie', 'debowa-zagroda' ), debowa_zagroda_image( 'alpaca-visit.webp' ) ),
         'alpaca_2_image'  => array( 'alpacas', __( 'Alpaka 2 — zdjęcie', 'debowa-zagroda' ), debowa_zagroda_image( 'alpaca-visit.webp' ) ),
         'alpaca_3_image'  => array( 'alpacas', __( 'Alpaka 3 — zdjęcie', 'debowa-zagroda' ), debowa_zagroda_image( 'alpaca-visit.webp' ) ),

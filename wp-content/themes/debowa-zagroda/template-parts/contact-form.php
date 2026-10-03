@@ -1,6 +1,6 @@
 <?php
 /**
- * Formularz wspólny dla strony głównej i kontaktu.
+ * Formularz kontaktowy.
  *
  * @package Debowa_Zagroda
  */
@@ -63,7 +63,7 @@ $visit_type = isset( $_GET['visit'] ) ? sanitize_text_field( wp_unslash( $_GET['
 
     <div class="contact-form__footer">
         <p><?php esc_html_e( 'Wysyłając formularz, zgadzasz się na kontakt w sprawie wizyty.', 'debowa-zagroda' ); ?></p>
-        <button class="button button--cream" type="submit">
+        <button class="button button--primary" type="submit">
             <?php esc_html_e( 'Wyślij wiadomość', 'debowa-zagroda' ); ?>
             <span aria-hidden="true">↗</span>
         </button>

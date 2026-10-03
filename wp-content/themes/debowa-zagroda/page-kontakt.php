@@ -29,19 +29,18 @@ $instagram = get_theme_mod( 'instagram_url', '' );
                     <a class="button button--ghost" href="<?php echo esc_url( $phone_url ); ?>"><?php esc_html_e( 'Zadzwoń', 'debowa-zagroda' ); ?><span aria-hidden="true">↗</span></a>
                 </div>
             </div>
-            <aside class="contact-page-note reveal reveal--right" aria-label="<?php esc_attr_e( 'Rezerwacja wizyty', 'debowa-zagroda' ); ?>">
-                <span class="contact-page-note__icon" aria-hidden="true">✦</span>
-                <h2><?php esc_html_e( 'Najpierw termin. Potem dobre wspomnienia.', 'debowa-zagroda' ); ?></h2>
-                <p><?php echo esc_html( $hours ); ?>. <?php esc_html_e( 'Przed przyjazdem skontaktuj się z nami, żeby ustalić szczegóły spotkania.', 'debowa-zagroda' ); ?></p>
-                <a href="<?php echo esc_url( debowa_zagroda_offer_url() ); ?>"><?php esc_html_e( 'Poznaj ofertę i cennik', 'debowa-zagroda' ); ?> <span aria-hidden="true">↗</span></a>
-            </aside>
         </div>
     </div>
 </section>
 
-<section id="formularz" class="section section--contact section--contact-page" aria-labelledby="contact-details-title">
+<section class="section section--contact section--contact-page" aria-labelledby="contact-form-title">
     <div class="site-shell contact">
-        <div class="contact__intro reveal reveal--left">
+        <div id="formularz" class="contact__form-wrap reveal reveal--left">
+            <h2 id="contact-form-title" class="contact-page__form-title"><?php esc_html_e( 'Napisz do nas', 'debowa-zagroda' ); ?></h2>
+            <p class="contact-page__form-intro"><?php esc_html_e( 'Podaj termin, liczbę osób i to, na co masz ochotę. Wspólnie zaplanujemy spotkanie.', 'debowa-zagroda' ); ?></p>
+            <?php get_template_part( 'template-parts/contact-form' ); ?>
+        </div>
+        <div class="contact__intro reveal reveal--right">
             <p class="eyebrow eyebrow--light"><span class="eyebrow__line"></span><?php echo esc_html( get_theme_mod( 'contact_eyebrow', 'Do zobaczenia w zagrodzie' ) ); ?></p>
             <h2 id="contact-details-title"><?php esc_html_e( 'Porozmawiajmy o Twojej wizycie', 'debowa-zagroda' ); ?></h2>
             <p class="section-lead"><?php esc_html_e( 'Masz pytanie, szukasz terminu albo planujesz wyjątkową okazję? Zadzwoń lub zostaw nam wiadomość.', 'debowa-zagroda' ); ?></p>
@@ -70,23 +69,19 @@ $instagram = get_theme_mod( 'instagram_url', '' );
                 </div>
             <?php endif; ?>
         </div>
-        <div class="contact__form-wrap reveal reveal--right">
-            <h2 class="contact-page__form-title"><?php esc_html_e( 'Napisz do nas', 'debowa-zagroda' ); ?></h2>
-            <p class="contact-page__form-intro"><?php esc_html_e( 'Podaj termin, liczbę osób i to, na co masz ochotę. Wspólnie zaplanujemy spotkanie.', 'debowa-zagroda' ); ?></p>
-            <?php get_template_part( 'template-parts/contact-form' ); ?>
-        </div>
     </div>
 </section>
 
 <section id="dojazd" class="section section--contact-location" aria-labelledby="location-title">
     <div class="site-shell contact-location">
-        <div class="contact-location__media reveal reveal--left">
-            <img src="<?php echo esc_url( get_theme_mod( 'about_image', debowa_zagroda_image( 'alpaca-walk.webp' ) ) ); ?>" alt="<?php esc_attr_e( 'Spacer z alpakami pośród zieleni', 'debowa-zagroda' ); ?>" loading="lazy">
+        <div class="contact-location__card reveal reveal--left">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 43S9 27 9 18a15 15 0 0 1 30 0c0 9-15 25-15 25Z"/><circle cx="24" cy="18" r="5"/></svg>
+            <p><?php echo esc_html( $address ); ?></p>
+            <span><?php echo esc_html( $hours ); ?></span>
         </div>
         <div class="contact-location__content reveal reveal--right">
             <p class="eyebrow"><span class="eyebrow__line"></span><?php esc_html_e( 'Blisko natury, blisko Ciebie', 'debowa-zagroda' ); ?></p>
             <h2 id="location-title"><?php esc_html_e( 'Znajdź drogę do zagrody', 'debowa-zagroda' ); ?></h2>
-            <p class="contact-location__address"><?php echo esc_html( $address ); ?></p>
             <p class="section-lead"><?php esc_html_e( 'Zanim ruszysz w drogę, ustal z nami termin wizyty. Na miejscu będą czekać nasze alpaki i chwila spokoju.', 'debowa-zagroda' ); ?></p>
             <a class="button button--primary" href="<?php echo esc_url( debowa_zagroda_directions_url() ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Otwórz mapę i dojazd', 'debowa-zagroda' ); ?><span aria-hidden="true">↗</span></a>
         </div>

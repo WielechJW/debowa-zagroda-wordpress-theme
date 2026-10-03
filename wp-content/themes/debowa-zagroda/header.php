@@ -13,7 +13,7 @@
     <meta name="theme-color" content="#1f3b2b">
     <?php wp_head(); ?>
 </head>
-<body <?php body_class(); ?>>
+<body id="top" <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <a class="skip-link" href="#content"><?php esc_html_e( 'Przejdź do treści', 'debowa-zagroda' ); ?></a>
 
@@ -23,12 +23,12 @@
             <?php if ( has_custom_logo() ) : ?>
                 <?php the_custom_logo(); ?>
             <?php else : ?>
-                <a class="brand-logo" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">
+                <a class="brand-logo" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php echo esc_attr( debowa_zagroda_brand_name() ); ?>">
                     <img src="<?php echo esc_url( debowa_zagroda_image( 'logo-debowa-zagroda.jpg' ) ); ?>" alt="" width="1254" height="1254">
                 </a>
             <?php endif; ?>
             <a class="site-title" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-                <span><?php bloginfo( 'name' ); ?></span>
+                <span><?php echo esc_html( debowa_zagroda_brand_name() ); ?></span>
                 <?php if ( get_bloginfo( 'description' ) ) : ?>
                     <small><?php bloginfo( 'description' ); ?></small>
                 <?php endif; ?>

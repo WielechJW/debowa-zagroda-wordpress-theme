@@ -26,7 +26,7 @@
         },
         {
           "slug": "terracotta",
-          "color": "#bd6b4a",
+          "color": "#a65335",
           "name": "Terakota"
         },
         {
@@ -45,12 +45,12 @@
       "fluid": true,
       "fontFamilies": [
         {
-          "fontFamily": "\"Avenir Next\", Avenir, \"Segoe UI\", Helvetica, Arial, sans-serif",
+          "fontFamily": "\"Debowa Sans\", Arial, sans-serif",
           "name": "Dębowa Sans",
           "slug": "debowa-sans"
         },
         {
-          "fontFamily": "Iowan Old Style, Baskerville, \"Times New Roman\", serif",
+          "fontFamily": "\"Debowa Serif\", Georgia, serif",
           "name": "Dębowa Serif",
           "slug": "debowa-serif"
         }

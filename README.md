@@ -62,13 +62,21 @@ make wp ARGS='post create --post_type=page --post_title="Oferta i cennik" --post
 
 The `/kontakt/` page uses `page-kontakt.php` and includes contact details, a reservation form, social links when configured, and a directions link. Its text and contact details use the existing **Appearance → Customize → Dębowa Zagroda — strona główna → Kontakt i stopka** settings. If no map URL is configured, the directions link searches Google Maps for the configured address.
 
-The homepage and contact page share `template-parts/contact-form.php`. All form results return to `/kontakt/#formularz`, preserving the selected visit. The default menu, footer, and booking links lead to the contact page. Add it manually if using a custom WordPress menu.
+The homepage has a compact invitation linking to the form on the contact page. The form uses `template-parts/contact-form.php`; all results return to `/kontakt/#formularz`, preserving the selected visit. The default menu, footer, and booking links lead to the contact page. Add it manually if using a custom WordPress menu.
 
 The setup script creates the page if it does not exist. To add it to an existing installation:
 
 ```bash
 make wp ARGS='post create --post_type=page --post_title="Kontakt" --post_name=kontakt --post_status=publish --page_template=page-kontakt.php'
 ```
+
+### Visual assets
+
+The theme hosts its fonts locally in `assets/fonts/`. These WOFF2 files include Polish characters and are renamed subsets of Liberation Fonts; their license is included in `assets/fonts/LICENSE.txt`.
+
+Default alpaca portraits use individual CSS crops of the existing group photo. Uploading a separate portrait in the Customizer uses normal centered framing. Gallery images can also be replaced in the Customizer. The header uses the original Dębowa Zagroda logo unless a custom WordPress logo is configured.
+
+Standard and private meeting prices are shown per person. Photo-session prices apply to the displayed session duration. Layout breakpoints depend on width, with section heights determined by their content.
 
 ## WP-CLI
 
