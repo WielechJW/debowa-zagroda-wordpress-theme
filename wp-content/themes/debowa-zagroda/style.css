@@ -3,7 +3,7 @@ Theme Name: Dębowa Zagroda
 Theme URI: https://github.com/
 Author: Dębowa Zagroda
 Description: Ciepły, animowany motyw dla alpakarni Dębowa Zagroda z ofertą i cennikiem.
-Version: 1.3.6
+Version: 1.3.7
 Requires at least: 6.7
 Requires PHP: 8.2
 Text Domain: debowa-zagroda
@@ -2095,7 +2095,7 @@ body:not(.home) .site-header::before {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 68% center;
+  object-position: 52% 48%;
 }
 
 .photo-offer__caption {

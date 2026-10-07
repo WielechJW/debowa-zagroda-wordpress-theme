@@ -109,7 +109,15 @@ $events    = array( 'Urodziny z alpakami', 'Przedszkola i szkoły', 'Festyny i i
 <section id="sesje" class="section section--photo" aria-labelledby="photo-title">
     <div class="site-shell photo-offer">
         <div class="photo-offer__media reveal reveal--left">
-            <img src="<?php echo esc_url( get_theme_mod( 'hero_image', debowa_zagroda_image( 'hero-alpacas.webp' ) ) ); ?>" alt="<?php esc_attr_e( 'Puchate alpaki pośród zieleni', 'debowa-zagroda' ); ?>" loading="lazy">
+            <img
+                src="<?php echo esc_url( debowa_zagroda_image( 'galeria_5-1600.webp' ) ); ?>"
+                srcset="<?php echo esc_url( debowa_zagroda_image( 'galeria_5-800.webp' ) ); ?> 800w, <?php echo esc_url( debowa_zagroda_image( 'galeria_5-1600.webp' ) ); ?> 1600w"
+                sizes="(max-width: 50rem) calc(100vw - 2rem), 50vw"
+                width="1600" height="1200"
+                alt="<?php esc_attr_e( 'Sesja zdjęciowa z alpakami w lesie', 'debowa-zagroda' ); ?>"
+                loading="lazy"
+                decoding="async"
+            >
             <span class="photo-offer__caption"><?php esc_html_e( 'Wspomnienia, do których chce się wracać.', 'debowa-zagroda' ); ?></span>
         </div>
         <div class="photo-offer__content reveal reveal--right">
