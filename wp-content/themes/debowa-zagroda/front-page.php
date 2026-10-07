@@ -37,28 +37,32 @@ $offers = array(
 
 $alpacas = array(
     array(
-        'name'     => get_theme_mod( 'alpaca_1_name', 'Biała' ),
-        'text'     => get_theme_mod( 'alpaca_1_text', 'Ciekawska obserwatorka i pierwsza przy płocie.' ),
-        'image'    => get_theme_mod( 'alpaca_1_image', debowa_zagroda_image( 'alpaca-visit.webp' ) ),
-        'position' => 'alpaca-card__image--one',
+        'name'          => get_theme_mod( 'alpaca_1_name', 'Lord' ),
+        'text'          => get_theme_mod( 'alpaca_1_text', 'Ciekawska obserwatorka i pierwsza przy płocie.' ),
+        'image'         => get_theme_mod( 'alpaca_1_image', debowa_zagroda_image( 'lord.jpg' ) ),
+        'default_image' => debowa_zagroda_image( 'lord.jpg' ),
+        'position'      => 'alpaca-card__image--one',
     ),
     array(
-        'name'     => get_theme_mod( 'alpaca_2_name', 'Toffi' ),
-        'text'     => get_theme_mod( 'alpaca_2_text', 'Spokojny łakomczuch o karmelowym futrze.' ),
-        'image'    => get_theme_mod( 'alpaca_2_image', debowa_zagroda_image( 'alpaca-visit.webp' ) ),
-        'position' => 'alpaca-card__image--two',
+        'name'          => get_theme_mod( 'alpaca_2_name', 'Barri' ),
+        'text'          => get_theme_mod( 'alpaca_2_text', 'Spokojny łakomczuch o karmelowym futrze.' ),
+        'image'         => get_theme_mod( 'alpaca_2_image', debowa_zagroda_image( 'barri.jpg' ) ),
+        'default_image' => debowa_zagroda_image( 'barri.jpg' ),
+        'position'      => 'alpaca-card__image--two',
     ),
     array(
-        'name'     => get_theme_mod( 'alpaca_3_name', 'Dąbek' ),
-        'text'     => get_theme_mod( 'alpaca_3_text', 'Dostojny indywidualista, który zna swoją wartość.' ),
-        'image'    => get_theme_mod( 'alpaca_3_image', debowa_zagroda_image( 'alpaca-visit.webp' ) ),
-        'position' => 'alpaca-card__image--three',
+        'name'          => get_theme_mod( 'alpaca_3_name', 'Pierro' ),
+        'text'          => get_theme_mod( 'alpaca_3_text', 'Dostojny indywidualista, który zna swoją wartość.' ),
+        'image'         => get_theme_mod( 'alpaca_3_image', debowa_zagroda_image( 'pierro.jpg' ) ),
+        'default_image' => debowa_zagroda_image( 'pierro.jpg' ),
+        'position'      => 'alpaca-card__image--three',
     ),
     array(
-        'name'     => get_theme_mod( 'alpaca_4_name', 'Chmurka' ),
-        'text'     => get_theme_mod( 'alpaca_4_text', 'Delikatna dusza i mistrzyni słodkich spojrzeń.' ),
-        'image'    => get_theme_mod( 'alpaca_4_image', debowa_zagroda_image( 'alpaca-visit.webp' ) ),
-        'position' => 'alpaca-card__image--four',
+        'name'          => get_theme_mod( 'alpaca_4_name', 'Ricco' ),
+        'text'          => get_theme_mod( 'alpaca_4_text', 'Delikatna dusza i mistrzyni słodkich spojrzeń.' ),
+        'image'         => get_theme_mod( 'alpaca_4_image', debowa_zagroda_image( 'ricco.jpg' ) ),
+        'default_image' => debowa_zagroda_image( 'ricco.jpg' ),
+        'position'      => 'alpaca-card__image--four',
     ),
 );
 
@@ -234,7 +238,13 @@ $phone      = get_theme_mod( 'contact_phone', '+48 608 242 618' );
             <?php foreach ( $alpacas as $index => $alpaca ) : ?>
                 <article class="alpaca-card">
                     <div class="alpaca-card__media">
-                        <img class="alpaca-card__image <?php echo esc_attr( $alpaca['position'] ); ?><?php if ( debowa_zagroda_image( 'alpaca-visit.webp' ) === $alpaca['image'] ) : ?> alpaca-card__image--group<?php endif; ?>" src="<?php echo esc_url( $alpaca['image'] ); ?>" alt="<?php echo esc_attr( $alpaca['name'] ); ?>" loading="lazy">
+                        <img
+                            class="alpaca-card__image <?php echo esc_attr( $alpaca['position'] ); ?><?php if ( $alpaca['default_image'] === $alpaca['image'] ) : ?> alpaca-card__image--portrait<?php elseif ( debowa_zagroda_image( 'alpaca-visit.webp' ) === $alpaca['image'] ) : ?> alpaca-card__image--group<?php endif; ?>"
+                            src="<?php echo esc_url( $alpaca['image'] ); ?>"
+                            alt="<?php echo esc_attr( $alpaca['name'] ); ?>"
+                            loading="lazy"
+                            decoding="async"
+                        >
                         <span class="alpaca-card__index">0<?php echo esc_html( (string) ( $index + 1 ) ); ?></span>
                     </div>
                     <div class="alpaca-card__body">

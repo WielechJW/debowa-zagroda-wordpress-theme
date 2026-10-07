@@ -74,7 +74,7 @@ make wp ARGS='post create --post_type=page --post_title="Kontakt" --post_name=ko
 
 The theme hosts its fonts locally in `assets/fonts/`. These WOFF2 files include Polish characters and are renamed subsets of Liberation Fonts; their license is included in `assets/fonts/LICENSE.txt`.
 
-Default alpaca portraits use individual CSS crops of the existing group photo. Uploading a separate portrait in the Customizer uses normal centered framing. Gallery images can also be replaced in the Customizer. The header uses the original Dębowa Zagroda logo unless a custom WordPress logo is configured.
+Default alpaca portraits use `lord.jpg`, `barri.jpg`, `pierro.jpg`, and `ricco.jpg`, with individual CSS framing. Uploading a separate portrait in the Customizer uses normal centered framing. Gallery images can also be replaced in the Customizer. The header uses the original Dębowa Zagroda logo unless a custom WordPress logo is configured.
 
 Standard and private meeting prices are shown per person. Photo-session prices apply to the displayed session duration. Layout breakpoints depend on width, with section heights determined by their content.
 

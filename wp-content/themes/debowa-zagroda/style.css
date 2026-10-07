@@ -3,7 +3,7 @@ Theme Name: Dębowa Zagroda
 Theme URI: https://github.com/
 Author: Dębowa Zagroda
 Description: Ciepły, animowany motyw dla alpakarni Dębowa Zagroda z ofertą i cennikiem.
-Version: 1.3.3
+Version: 1.3.4
 Requires at least: 6.7
 Requires PHP: 8.2
 Text Domain: debowa-zagroda
@@ -1113,7 +1113,14 @@ body:not(.home) .site-header::before {
   object-position: center;
 }
 
-/* Crop the default group photo; custom portrait uploads keep their own framing. */
+/* Frame the bundled portraits without changing custom uploads. */
+.alpaca-card__image--portrait {
+  object-position: var(--portrait-focus);
+  transform: scale(var(--portrait-zoom, 1));
+  transform-origin: var(--portrait-focus);
+}
+
+/* Keep the individual crops when the original group photo is selected. */
 .alpaca-card__image--group {
   position: absolute;
   top: 50%;
@@ -1125,21 +1132,27 @@ body:not(.home) .site-header::before {
 }
 
 .alpaca-card__image--one {
+  --portrait-focus: 52% 38%;
+  --portrait-zoom: 1.4;
   --portrait-x: 18%;
   --portrait-y: 35%;
 }
 
 .alpaca-card__image--two {
+  --portrait-focus: 45% 15%;
   --portrait-x: 41%;
   --portrait-y: 39%;
 }
 
 .alpaca-card__image--three {
+  --portrait-focus: 50% 30%;
+  --portrait-zoom: 1.18;
   --portrait-x: 60%;
   --portrait-y: 40%;
 }
 
 .alpaca-card__image--four {
+  --portrait-focus: 50% 22%;
   --portrait-x: 78%;
   --portrait-y: 43%;
 }
