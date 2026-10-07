@@ -205,7 +205,7 @@ function debowa_zagroda_customize_register( WP_Customize_Manager $wp_customize )
     }
 
     $url_settings = array(
-        'contact_email' => array( 'contact', __( 'E-mail odbiorcy formularza', 'debowa-zagroda' ), get_option( 'admin_email' ), 'sanitize_email' ),
+        'contact_email' => array( 'contact', __( 'E-mail odbiorcy formularza', 'debowa-zagroda' ), 'kontakt@debowazagroda.pl', 'sanitize_email' ),
         'facebook_url'  => array( 'contact', __( 'Facebook — adres URL', 'debowa-zagroda' ), '', 'esc_url_raw' ),
         'instagram_url' => array( 'contact', __( 'Instagram — adres URL', 'debowa-zagroda' ), '', 'esc_url_raw' ),
         'maps_url'      => array( 'contact', __( 'Mapa / dojazd — adres URL', 'debowa-zagroda' ), '', 'esc_url_raw' ),
@@ -287,7 +287,7 @@ function debowa_zagroda_handle_contact_form(): void {
         exit;
     }
 
-    $recipient = sanitize_email( get_theme_mod( 'contact_email', get_option( 'admin_email' ) ) );
+    $recipient = sanitize_email( get_theme_mod( 'contact_email', 'kontakt@debowazagroda.pl' ) );
     $subject   = sprintf( __( '[Dębowa Zagroda] Wiadomość od %s', 'debowa-zagroda' ), $name );
     $body      = sprintf(
         "Imię: %s\nE-mail: %s\nTelefon: %s\nRodzaj wizyty: %s\n\nWiadomość:\n%s",

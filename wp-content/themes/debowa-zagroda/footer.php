@@ -42,7 +42,7 @@ $instagram = get_theme_mod( 'instagram_url', '' );
 
         <div class="site-footer__nav">
             <span><?php esc_html_e( 'Kontakt', 'debowa-zagroda' ); ?></span>
-            <a href="mailto:<?php echo esc_attr( get_theme_mod( 'contact_email', get_option( 'admin_email' ) ) ); ?>"><?php echo esc_html( get_theme_mod( 'contact_email', get_option( 'admin_email' ) ) ); ?></a>
+            <a href="mailto:<?php echo esc_attr( get_theme_mod( 'contact_email', 'kontakt@debowazagroda.pl' ) ); ?>"><?php echo esc_html( get_theme_mod( 'contact_email', 'kontakt@debowazagroda.pl' ) ); ?></a>
             <a href="tel:<?php echo esc_attr( preg_replace( '/[^0-9+]/', '', get_theme_mod( 'contact_phone', '+48 608 242 618' ) ) ); ?>"><?php echo esc_html( get_theme_mod( 'contact_phone', '+48 608 242 618' ) ); ?></a>
         </div>
 

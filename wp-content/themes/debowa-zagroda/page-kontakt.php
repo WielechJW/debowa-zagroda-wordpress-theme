@@ -9,7 +9,7 @@ get_header();
 
 $phone     = get_theme_mod( 'contact_phone', '+48 608 242 618' );
 $phone_url = 'tel:' . preg_replace( '/[^0-9+]/', '', $phone );
-$email     = get_theme_mod( 'contact_email', get_option( 'admin_email' ) );
+$email     = get_theme_mod( 'contact_email', 'kontakt@debowazagroda.pl' );
 $address   = get_theme_mod( 'contact_address', 'Dębowa 3e, Warszawa' );
 $hours     = get_theme_mod( 'contact_hours', 'Wizyty po wcześniejszej rezerwacji' );
 $facebook  = get_theme_mod( 'facebook_url', '' );
