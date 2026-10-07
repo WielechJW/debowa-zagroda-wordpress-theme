@@ -139,7 +139,27 @@ document.documentElement.classList.add("has-js");
   const lightbox = document.querySelector("[data-lightbox]");
   const lightboxImage = lightbox?.querySelector("img");
   const lightboxClose = lightbox?.querySelector("[data-lightbox-close]");
+  const lightboxPrevious = lightbox?.querySelector("[data-lightbox-previous]");
+  const lightboxNext = lightbox?.querySelector("[data-lightbox-next]");
+  const lightboxCounter = lightbox?.querySelector("[data-lightbox-counter]");
+  const galleryItems = Array.from(document.querySelectorAll("[data-gallery-item]"));
   let lightboxTrigger = null;
+  let lightboxIndex = -1;
+
+  [lightboxPrevious, lightboxNext].forEach((button) => {
+    if (button) button.hidden = galleryItems.length < 2;
+  });
+
+  const showLightboxImage = (index) => {
+    if (!lightboxImage || !galleryItems.length) return;
+    lightboxIndex = (index + galleryItems.length) % galleryItems.length;
+    const item = galleryItems[lightboxIndex];
+    lightboxImage.src = item.dataset.image || "";
+    lightboxImage.alt = item.dataset.alt || "";
+    if (lightboxCounter) {
+      lightboxCounter.textContent = `${lightboxIndex + 1} / ${galleryItems.length}`;
+    }
+  };
 
   const closeLightbox = () => {
     if (!lightbox) return;
@@ -147,14 +167,15 @@ document.documentElement.classList.add("has-js");
     lightbox.setAttribute("aria-hidden", "true");
     body.classList.remove("lightbox-open");
     lightboxImage?.removeAttribute("src");
+    lightboxIndex = -1;
     lightboxTrigger?.focus();
   };
 
-  document.querySelectorAll("[data-gallery-item]").forEach((item) => {
+  galleryItems.forEach((item, index) => {
     item.addEventListener("click", () => {
       if (!lightbox || !lightboxImage) return;
       lightboxTrigger = item;
-      lightboxImage.src = item.dataset.image || "";
+      showLightboxImage(index);
       lightbox.classList.add("is-open");
       lightbox.setAttribute("aria-hidden", "false");
       body.classList.add("lightbox-open");
@@ -163,14 +184,35 @@ document.documentElement.classList.add("has-js");
   });
 
   lightboxClose?.addEventListener("click", closeLightbox);
+  lightboxPrevious?.addEventListener("click", () => showLightboxImage(lightboxIndex - 1));
+  lightboxNext?.addEventListener("click", () => showLightboxImage(lightboxIndex + 1));
 
   lightbox?.addEventListener("click", (event) => {
     if (event.target === lightbox) closeLightbox();
   });
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && lightbox?.classList.contains("is-open")) {
+    if (!lightbox?.classList.contains("is-open")) return;
+    if (event.key === "Escape") {
+      event.preventDefault();
       closeLightbox();
+    } else if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+      event.preventDefault();
+      showLightboxImage(lightboxIndex + (event.key === "ArrowRight" ? 1 : -1));
+    } else if (event.key === "Tab") {
+      const controls = [lightboxClose, lightboxPrevious, lightboxNext].filter((button) => button && !button.hidden);
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (!controls.includes(document.activeElement)) {
+        event.preventDefault();
+        (event.shiftKey ? last : first)?.focus();
+      } else if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
     }
   });
 

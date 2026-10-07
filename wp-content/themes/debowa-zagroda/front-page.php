@@ -66,19 +66,21 @@ $alpacas = array(
     ),
 );
 
-$gallery_defaults = array(
-    debowa_zagroda_image( 'hero-alpacas.webp' ),
-    debowa_zagroda_image( 'alpaca-walk.webp' ),
-    debowa_zagroda_image( 'alpaca-visit.webp' ),
-    '',
-    '',
-    '',
-);
+$gallery_defaults = debowa_zagroda_gallery_defaults();
 $gallery = array();
-for ( $i = 1; $i <= 6; $i++ ) {
-    $image = get_theme_mod( 'gallery_image_' . $i, $gallery_defaults[ $i - 1 ] );
+foreach ( $gallery_defaults as $index => $photo ) {
+    $image = get_theme_mod( 'gallery_image_' . ( $index + 1 ), $photo['image'] );
     if ( $image ) {
-        $gallery[] = $image;
+        if ( $image !== $photo['image'] ) {
+            $photo = array(
+                'image'         => $image,
+                'preview'       => $image,
+                'small_preview' => '',
+                'alt'           => __( 'Zdjęcie z Dębowej Zagrody', 'debowa-zagroda' ),
+                'class'         => '',
+            );
+        }
+        $gallery[] = $photo;
     }
 }
 
@@ -272,9 +274,26 @@ $phone      = get_theme_mod( 'contact_phone', '+48 608 242 618' );
         </header>
 
         <div class="gallery-grid" data-gallery data-reveal-group>
-            <?php foreach ( $gallery as $index => $image ) : ?>
-                <button class="gallery-item gallery-item--<?php echo esc_attr( (string) ( $index + 1 ) ); ?>" type="button" data-gallery-item data-image="<?php echo esc_url( $image ); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Powiększ zdjęcie %d', 'debowa-zagroda' ), $index + 1 ) ); ?>">
-                    <img src="<?php echo esc_url( $image ); ?>" alt="" loading="lazy">
+            <?php foreach ( $gallery as $index => $photo ) : ?>
+                <button
+                    class="gallery-item gallery-item--<?php echo esc_attr( (string) ( $index + 1 ) ); ?> <?php echo esc_attr( $photo['class'] ); ?>"
+                    type="button"
+                    data-gallery-item
+                    data-image="<?php echo esc_url( $photo['image'] ); ?>"
+                    data-alt="<?php echo esc_attr( $photo['alt'] ); ?>"
+                    aria-label="<?php echo esc_attr( sprintf( __( 'Powiększ zdjęcie %1$d: %2$s', 'debowa-zagroda' ), $index + 1, $photo['alt'] ) ); ?>"
+                >
+                    <img
+                        src="<?php echo esc_url( $photo['preview'] ); ?>"
+                        <?php if ( $photo['small_preview'] ) : ?>
+                            srcset="<?php echo esc_url( $photo['small_preview'] ); ?> 800w, <?php echo esc_url( $photo['preview'] ); ?> 1600w"
+                            sizes="<?php echo esc_attr( in_array( $index, array( 0, 3 ), true ) ? '(max-width: 50rem) calc(100vw - 2rem), min(58vw, 45rem)' : '(max-width: 50rem) calc((100vw - 2.75rem) / 2), ' . ( $index >= 4 ? 'min(25vw, 19rem)' : 'min(42vw, 32rem)' ) ); ?>"
+                            width="1600" height="<?php echo esc_attr( (string) $photo['height'] ); ?>"
+                        <?php endif; ?>
+                        alt="<?php echo esc_attr( $photo['alt'] ); ?>"
+                        loading="lazy"
+                        decoding="async"
+                    >
                     <span aria-hidden="true">＋</span>
                 </button>
             <?php endforeach; ?>
@@ -301,7 +320,14 @@ $phone      = get_theme_mod( 'contact_phone', '+48 608 242 618' );
 
 <div class="lightbox" data-lightbox aria-hidden="true" role="dialog" aria-modal="true" aria-label="<?php esc_attr_e( 'Podgląd zdjęcia', 'debowa-zagroda' ); ?>">
     <button type="button" class="lightbox__close" data-lightbox-close aria-label="<?php esc_attr_e( 'Zamknij podgląd', 'debowa-zagroda' ); ?>">×</button>
+    <button type="button" class="lightbox__nav lightbox__nav--previous" data-lightbox-previous aria-label="<?php esc_attr_e( 'Poprzednie zdjęcie', 'debowa-zagroda' ); ?>">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
     <img src="" alt="">
+    <button type="button" class="lightbox__nav lightbox__nav--next" data-lightbox-next aria-label="<?php esc_attr_e( 'Następne zdjęcie', 'debowa-zagroda' ); ?>">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+    </button>
+    <span class="lightbox__counter" data-lightbox-counter role="status" aria-live="polite" aria-atomic="true"></span>
 </div>
 
 <?php

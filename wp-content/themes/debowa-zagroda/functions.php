@@ -50,6 +50,50 @@ function debowa_zagroda_image( string $filename ): string {
     return get_template_directory_uri() . '/assets/images/' . ltrim( $filename, '/' );
 }
 
+function debowa_zagroda_gallery_defaults(): array {
+    $photos = array(
+        array(
+            'file'  => 'galeria_4',
+            'alt'   => __( 'Cztery alpaki na leśnej ścieżce', 'debowa-zagroda' ),
+            'class' => 'gallery-photo--forest',
+        ),
+        array(
+            'file'  => 'galeria_5',
+            'alt'   => __( 'Spotkanie z alpakami podczas spaceru w lesie', 'debowa-zagroda' ),
+            'class' => 'gallery-photo--meeting',
+        ),
+        array(
+            'file'  => 'galeria_6',
+            'alt'   => __( 'Spokojny spacer z alpakami wśród drzew', 'debowa-zagroda' ),
+            'class' => 'gallery-photo--walk',
+        ),
+        array(
+            'file'  => 'galeria_9',
+            'alt'   => __( 'Alpaki pasące się na słonecznej łące', 'debowa-zagroda' ),
+            'class' => 'gallery-photo--meadow',
+        ),
+        array(
+            'file'  => 'galeria_2',
+            'alt'   => __( 'Alpaki na wybiegu w Dębowej Zagrodzie', 'debowa-zagroda' ),
+            'class' => 'gallery-photo--paddock',
+        ),
+        array(
+            'file'  => 'galeria_8',
+            'alt'   => __( 'Goście z czterema alpakami podczas spaceru w lesie', 'debowa-zagroda' ),
+            'class' => 'gallery-photo--guests',
+        ),
+    );
+
+    foreach ( $photos as $index => $photo ) {
+        $photos[ $index ]['image']         = debowa_zagroda_image( $photo['file'] . '.jpg' );
+        $photos[ $index ]['preview']       = debowa_zagroda_image( $photo['file'] . '-1600.webp' );
+        $photos[ $index ]['small_preview'] = debowa_zagroda_image( $photo['file'] . '-800.webp' );
+        $photos[ $index ]['height']        = in_array( $photo['file'], array( 'galeria_2', 'galeria_8' ), true ) ? 2133 : 1200;
+    }
+
+    return $photos;
+}
+
 function debowa_zagroda_brand_name(): string {
     $name = get_bloginfo( 'name' );
     return 'debowa zagroda' === strtolower( remove_accents( $name ) ) ? 'Dębowa Zagroda' : $name;
@@ -188,13 +232,12 @@ function debowa_zagroda_customize_register( WP_Customize_Manager $wp_customize )
         'alpaca_2_image'  => array( 'alpacas', __( 'Alpaka 2 — zdjęcie', 'debowa-zagroda' ), debowa_zagroda_image( 'barri.jpg' ) ),
         'alpaca_3_image'  => array( 'alpacas', __( 'Alpaka 3 — zdjęcie', 'debowa-zagroda' ), debowa_zagroda_image( 'pierro.jpg' ) ),
         'alpaca_4_image'  => array( 'alpacas', __( 'Alpaka 4 — zdjęcie', 'debowa-zagroda' ), debowa_zagroda_image( 'ricco.jpg' ) ),
-        'gallery_image_1' => array( 'gallery', __( 'Zdjęcie 1', 'debowa-zagroda' ), debowa_zagroda_image( 'hero-alpacas.webp' ) ),
-        'gallery_image_2' => array( 'gallery', __( 'Zdjęcie 2', 'debowa-zagroda' ), debowa_zagroda_image( 'alpaca-walk.webp' ) ),
-        'gallery_image_3' => array( 'gallery', __( 'Zdjęcie 3', 'debowa-zagroda' ), debowa_zagroda_image( 'alpaca-visit.webp' ) ),
-        'gallery_image_4' => array( 'gallery', __( 'Zdjęcie 4 (opcjonalne)', 'debowa-zagroda' ), '' ),
-        'gallery_image_5' => array( 'gallery', __( 'Zdjęcie 5 (opcjonalne)', 'debowa-zagroda' ), '' ),
-        'gallery_image_6' => array( 'gallery', __( 'Zdjęcie 6 (opcjonalne)', 'debowa-zagroda' ), '' ),
     );
+
+    foreach ( debowa_zagroda_gallery_defaults() as $index => $photo ) {
+        $number = $index + 1;
+        $images[ 'gallery_image_' . $number ] = array( 'gallery', sprintf( __( 'Zdjęcie %d', 'debowa-zagroda' ), $number ), $photo['image'] );
+    }
 
     foreach ( $images as $id => $data ) {
         $wp_customize->add_setting( $id, array( 'default' => $data[2], 'sanitize_callback' => 'esc_url_raw' ) );

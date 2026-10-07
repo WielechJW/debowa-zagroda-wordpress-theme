@@ -76,6 +76,8 @@ The theme hosts its fonts locally in `assets/fonts/`. These WOFF2 files include 
 
 Default alpaca portraits use `lord.jpg`, `barri.jpg`, `pierro.jpg`, and `ricco.jpg`, with individual CSS framing. Uploading a separate portrait in the Customizer uses normal centered framing. Gallery images can also be replaced in the Customizer. The header uses the original Dębowa Zagroda logo unless a custom WordPress logo is configured.
 
+The gallery uses six curated photos, in this order: `galeria_4.jpg`, `galeria_5.jpg`, `galeria_6.jpg`, `galeria_9.jpg`, `galeria_2.jpg`, and `galeria_8.jpg`. The thumbnails use 800px and 1600px WebP previews with individual CSS framing; the lightbox opens the original JPEG. Use the previous/next buttons or the keyboard arrow keys to cycle through the photos; Escape closes the preview. Default photos and descriptions are defined in `debowa_zagroda_gallery_defaults()`.
+
 Standard and private meeting prices are shown per person. Photo-session prices apply to the displayed session duration. Layout breakpoints depend on width, with section heights determined by their content.
 
 ## WP-CLI
