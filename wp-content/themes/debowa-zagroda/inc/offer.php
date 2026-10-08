@@ -33,17 +33,17 @@ function debowa_zagroda_offer_packages( bool $use_settings = true ): array {
             'features' => array( 'Poznanie alpak', 'Karmienie i głaskanie', 'Ciekawostki o alpakach', 'Zdjęcia', 'Dłuższy spacer w kierunku lasu' ),
         ),
         'private_meeting' => array(
-            'title'    => 'Indywidualne spotkanie z alpakami',
+            'title'    => 'Spotkanie sam na sam z alpaką',
             'price'    => '60',
             'duration' => 'ok. 40 min',
         ),
         'private_walk' => array(
-            'title'    => 'Indywidualny spacer z alpaką',
+            'title'    => 'Spacer sam na sam z alpaką',
             'price'    => '90',
             'duration' => 'ok. 1 godz.',
         ),
         'private_forest' => array(
-            'title'    => 'Indywidualny spacer do lasu',
+            'title'    => 'Spacer do lasu sam na sam z alpaką',
             'price'    => '180',
             'duration' => 'ok. 2 godz.',
         ),
